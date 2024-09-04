@@ -1,7 +1,7 @@
+const apiKey = '9SJF3VZEUYVQJF76'; // Replace with your Alpha Vantage API key
+
 async function fetchStockData(symbol) {
-    const apiKey = '9SJF3VZEUYVQJF76'; // Replace with your Alpha Vantage API key
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${apiKey}`;
-    
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -9,6 +9,23 @@ async function fetchStockData(symbol) {
     } catch (error) {
         console.error('Error fetching stock data:', error);
         return null;
+    }
+}
+
+async function fetchFinancialData(symbol) {
+    const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return {
+            marketCap: data['MarketCapitalization'],
+            peRatio: data['PERatio'],
+            pegRatio: data['PEGRatio'],
+            debtToEquity: data['DebtEquityRatio']
+        };
+    } catch (error) {
+        console.error('Error fetching financial data:', error);
+        return {};
     }
 }
 
@@ -23,8 +40,8 @@ function calculateIndicators(data) {
 }
 
 function calculateADX(prices) {
-    // Simplified placeholder function for ADX calculation
-    return Math.random() * 100;  // Replace with actual calculation
+    // Placeholder function for ADX calculation
+    return (Math.random() * 100).toFixed(2);  // Replace with actual calculation
 }
 
 function calculateMA(prices, period) {
@@ -39,6 +56,7 @@ async function loadStockData() {
 
     for (const symbol of symbols) {
         const data = await fetchStockData(symbol);
+        const financials = await fetchFinancialData(symbol);
         if (!data) continue;
 
         const indicators = calculateIndicators(data);
@@ -49,6 +67,10 @@ async function loadStockData() {
             <td>${indicators.ma20}</td>
             <td>${indicators.ma50}</td>
             <td>${indicators.ma200}</td>
+            <td>${financials.marketCap || 'N/A'}</td>
+            <td>${financials.peRatio || 'N/A'}</td>
+            <td>${financials.pegRatio || 'N/A'}</td>
+            <td>${financials.debtToEquity || 'N/A'}</td>
         `;
         tableBody.appendChild(row);
     }
