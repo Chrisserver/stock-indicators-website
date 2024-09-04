@@ -4,7 +4,20 @@ async function fetchAllData(symbol) {
     const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`;
     try {
         const response = await fetch(url);
+
+        // Check if the response is OK (status 200-299)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
+
+        // Check if data is valid and not empty
+        if (!data || Object.keys(data).length === 0) {
+            console.error(`No data received for ${symbol}`);
+            return null;
+        }
+
         console.log(`All data for ${symbol}:`, data); // Debugging log
         return data;
     } catch (error) {
@@ -19,9 +32,10 @@ async function loadAllData() {
 
     for (const symbol of symbols) {
         const data = await fetchAllData(symbol);
+
         if (!data) {
             console.error(`No data for ${symbol}`);
-            continue;
+            continue; // Skip to the next symbol
         }
 
         // Create a section to display the JSON data
@@ -34,4 +48,5 @@ async function loadAllData() {
     }
 }
 
-loadAllData();
+// Call the loadAllData function when the page loads
+window.addEventListener('DOMContentLoaded', loadAllData);
