@@ -5,6 +5,7 @@ async function fetchStockData(symbol) {
     try {
         const response = await fetch(url);
         const data = await response.json();
+        console.log(`Stock data for ${symbol}:`, data); // Debugging log
         return data['Time Series (Daily)'];
     } catch (error) {
         console.error('Error fetching stock data:', error);
@@ -17,6 +18,7 @@ async function fetchFinancialData(symbol) {
     try {
         const response = await fetch(url);
         const data = await response.json();
+        console.log(`Financial data for ${symbol}:`, data); // Debugging log
         return {
             marketCap: data['MarketCapitalization'],
             peRatio: data['PERatio'],
@@ -30,13 +32,13 @@ async function fetchFinancialData(symbol) {
 }
 
 function calculateIndicators(data) {
+    if (!data) return {};
     const prices = Object.values(data).map(d => parseFloat(d['4. close']));
     const adx = calculateADX(prices);
-    const ma20 = calculateMA(prices, 20);
     const ma50 = calculateMA(prices, 50);
     const ma200 = calculateMA(prices, 200);
 
-    return { adx, ma20, ma50, ma200 };
+    return { adx, ma50, ma200 };
 }
 
 function calculateADX(prices) {
@@ -57,16 +59,20 @@ async function loadStockData() {
     for (const symbol of symbols) {
         const data = await fetchStockData(symbol);
         const financials = await fetchFinancialData(symbol);
-        if (!data) continue;
+        if (!data) {
+            console.error(`No data for ${symbol}`);
+            continue;
+        }
 
         const indicators = calculateIndicators(data);
+        console.log(`Indicators for ${symbol}:`, indicators); // Debugging log
+
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${symbol}</td>
-            <td>${indicators.adx}</td>
-            <td>${indicators.ma20}</td>
-            <td>${indicators.ma50}</td>
-            <td>${indicators.ma200}</td>
+            <td>${indicators.adx || 'N/A'}</td>
+            <td>${indicators.ma50 || 'N/A'}</td>
+            <td>${indicators.ma200 || 'N/A'}</td>
             <td>${financials.marketCap || 'N/A'}</td>
             <td>${financials.peRatio || 'N/A'}</td>
             <td>${financials.pegRatio || 'N/A'}</td>
