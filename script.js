@@ -1,6 +1,6 @@
 const apiKey = '9SJF3VZEUYVQJF76'; // Replace with your Alpha Vantage API key
 
-/**
+
 async function fetchAllData(symbol) {
     const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`;
     try {
@@ -51,7 +51,7 @@ async function loadAllData() {
 
 // Call the loadAllData function when the page loads
 window.addEventListener('DOMContentLoaded', loadAllData);
-**/
+/**
 async function fetchMovingAverages(symbol) {
     const url = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`;
     try {
@@ -105,3 +105,4 @@ async function loadMovingAverages() {
 
 // Call the loadMovingAverages function when the page loads
 window.addEventListener('DOMContentLoaded', loadMovingAverages);
+**/
