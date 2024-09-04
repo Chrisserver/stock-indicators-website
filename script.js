@@ -1,5 +1,5 @@
 async function fetchStockData(symbol) {
-    const apiKey = 'YOUR_API_KEY'; // Replace with your Alpha Vantage API key
+    const apiKey = '9SJF3VZEUYVQJF76'; // Replace with your Alpha Vantage API key
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${apiKey}`;
     
     try {
