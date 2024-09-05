@@ -19,15 +19,15 @@ h1 {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(248, 255, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card {
     margin: 20px 0;
     padding: 15px;
-    background-color: #e9ecef;
+    background-color: #f6ff00;
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(248, 255, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
