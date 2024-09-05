@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Apply dark orange background if ADX is less than 25
         if (data.adx < 25) {
             dataSection.classList.add('low-adx');
+        } else {
+            dataSection.classList.add('high-adx');
         }
 
         dataSection.innerHTML = `
