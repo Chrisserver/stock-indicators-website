@@ -72,6 +72,33 @@ th {
     font-weight: bold;
 }
 
+/* Button Styles */
+.buy-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.sell-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.buy-button:hover, .sell-button:hover {
+    opacity: 0.9;
+}
+
 /* Footer Styles */
 footer {
     text-align: center;
