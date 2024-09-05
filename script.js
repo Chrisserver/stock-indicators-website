@@ -14,11 +14,10 @@ async function fetchMovingAverages(symbol) {
         // Extract only the 50-Day and 200-Day Moving Averages
         const movingAverages = {
             name: symbol,
-            fiftyDayMA: data['50DayMovingAverage'],
-            twoHundredDayMA: data['200DayMovingAverage']
+            fiftyDayMA: parseFloat(data['50DayMovingAverage']),
+            twoHundredDayMA: parseFloat(data['200DayMovingAverage'])
         };
 
-        console.log(`Moving Averages for ${symbol}:`, movingAverages); // Debugging log
         return movingAverages;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -37,7 +36,7 @@ async function fetchADX(symbol) {
         const key = `Technical Analysis: ADX`;
         if (data[key]) {
             const firstEntry = Object.values(data[key])[0]; // Get the most recent entry
-            return firstEntry['ADX'];
+            return parseFloat(firstEntry['ADX']);
         }
         return 'N/A';
     } catch (error) {
@@ -47,30 +46,39 @@ async function fetchADX(symbol) {
 }
 
 async function loadMovingAverages() {
-    const symbols = ['UNIT', 'AGL', 'EVLV', 'ASPI', 'XRTX', 'VSTA', 'SPWH', 'LGCL', 'ATPC', 'MNTS', 'AIEV', 'ADD', 'FCEL', 'UNCY', 'CTNT', 'SVMH', 'KXIN', 'FFIEW']; // Add more symbols as needed
+    const symbols = ['UNIT', 'AGL', 'EVLV', 'ASPI', 'XRTX', 'VSTA', 'SPWH', 'LGCL', 'ATPC', 'MNTS', 'AIEV', 'ADD', 'FCEL', 'UNCY', 'CTNT', 'SVMH', 'KXIN', 'FFIEW'];
     const container = document.getElementById('data-container');
     container.style.textAlign = 'center'; // Center the content
+    const stockData = [];
 
     for (const symbol of symbols) {
-        const data = await fetchMovingAverages(symbol);
-        const data2 = await fetchADX(symbol);        
+        const maData = await fetchMovingAverages(symbol);
+        const adxData = await fetchADX(symbol);
 
-        if (!data || (!data.fiftyDayMA && !data.twoHundredDayMA)) {
-            console.error(`No moving averages data for ${symbol}`);
-            continue; // Skip to the next symbol
+        if (maData && adxData !== 'N/A') {
+            stockData.push({ ...maData, adx: adxData });
         }
+    }
 
+    // Sort stock data based on ADX values from highest to lowest
+    stockData.sort((a, b) => b.adx - a.adx);
+
+    // Display sorted data
+    stockData.forEach(data => {
         // Create a section to display the data
         const dataSection = document.createElement('div');
-        dataSection.style.margin = '20px'; // Add some margin
+        dataSection.className = 'card';
         dataSection.innerHTML = `
-            <h2>${data.name}</h2>
+            <h3>${data.name}</h3>
             <p><strong>50-Day MA:</strong> ${data.fiftyDayMA || 'N/A'}</p>
             <p><strong>200-Day MA:</strong> ${data.twoHundredDayMA || 'N/A'}</p>
-            <p><strong>ADX:</strong> ${data2 || 'N/A'}</p>
+            <p><strong>ADX:</strong> ${data.adx || 'N/A'}</p>
+            ${data.fiftyDayMA > data.twoHundredDayMA 
+                ? '<button class="buy-button">BUY</button>' 
+                : '<button class="sell-button">SELL</button>'}
         `;
         container.appendChild(dataSection);
-    }
+    });
 }
 
 // Call the loadMovingAverages function when the page loads
