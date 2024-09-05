@@ -79,7 +79,7 @@ async function fetchMovingAverages(symbol) {
 }
 
 async function loadMovingAverages() {
-    const symbols = ['AAPL', 'MSFT', 'GOOGL']; // Add more symbols as needed
+    const symbols = ['UNIT', 'AGL', 'EVLV', 'ASPI', 'XRTX', 'VSTA', 'SPWH', 'LGCL', 'ATPC', 'MNTS', 'AIEV', 'ADD', 'FCEL', 'UNCY', 'CTNT', 'SVMH', 'KXIN', 'FFIEW']; // Add more symbols as needed
     const container = document.getElementById('data-container');
     container.style.textAlign = 'center'; // Center the content
 
