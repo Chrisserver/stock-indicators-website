@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sampleData = [
-        { name: 'UNIT', fiftyDayMA: 12.5, twoHundredDayMA: 10.0, adx: 30.5 },
+        { name: 'UNIT', fiftyDayMA: 12.5, twoHundredDayMA: 10.0, adx: 3.5 },
         { name: 'AGL', fiftyDayMA: 9.0, twoHundredDayMA: 12.0, adx: 24.0 },
-        { name: 'EVLV', fiftyDayMA: 15.0, twoHundredDayMA: 14.0, adx: 35.2 },
+        { name: 'EVLV', fiftyDayMA: 15.0, twoHundredDayMA: 14.0, adx: 5.2 },
         { name: 'ASPI', fiftyDayMA: 11.0, twoHundredDayMA: 13.5, adx: 23.1 },
         { name: 'XRTX', fiftyDayMA: 20.0, twoHundredDayMA: 18.0, adx: 40.0 },
     ];
