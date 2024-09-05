@@ -19,7 +19,7 @@ h1 {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(248, 255, 0, 0.1);
 }
 
 .card {
@@ -27,7 +27,7 @@ h1 {
     padding: 15px;
     background-color: #e9ecef;
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(248, 255, 0, 0.1);
     text-align: center;
 }
 
@@ -84,10 +84,6 @@ p {
 }
 
 /* ADX Styling */
-.high-adx {
-    background-color: #f8ff00; /* Fluo Yellow */
-}
-
 .low-adx {
     background-color: #8b0000; /* Dark Red */
 }
