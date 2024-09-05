@@ -83,9 +83,13 @@ p {
     opacity: 0.9;
 }
 
-/* Low ADX Styling */
+/* ADX Styling */
+.high-adx {
+    background-color: #f8ff00; /* Fluo Yellow */
+}
+
 .low-adx {
-    background-color: #ff8c00; /* Dark Orange */
+    background-color: #BC13FE; /* Fluo Purple */
 }
 
 
