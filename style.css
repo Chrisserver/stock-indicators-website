@@ -57,7 +57,6 @@ p {
     line-height: 1.6;
 }
 
-/* Button Styles */
 .buy-button {
     background-color: #28a745;
     color: white;
@@ -84,10 +83,10 @@ p {
     opacity: 0.9;
 }
 
+/* Low ADX Styling */
 .low-adx {
     background-color: #ff8c00; /* Dark Orange */
 }
-
 
 
 
