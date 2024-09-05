@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sampleData = [
         { name: 'UNIT', fiftyDayMA: 12.5, twoHundredDayMA: 10.0, adx: 30.5 },
-        { name: 'AGL', fiftyDayMA: 9.0, twoHundredDayMA: 12.0, adx: 25.0 },
+        { name: 'AGL', fiftyDayMA: 9.0, twoHundredDayMA: 12.0, adx: 24.0 },
         { name: 'EVLV', fiftyDayMA: 15.0, twoHundredDayMA: 14.0, adx: 35.2 },
-        { name: 'ASPI', fiftyDayMA: 11.0, twoHundredDayMA: 13.5, adx: 28.1 },
+        { name: 'ASPI', fiftyDayMA: 11.0, twoHundredDayMA: 13.5, adx: 23.1 },
         { name: 'XRTX', fiftyDayMA: 20.0, twoHundredDayMA: 18.0, adx: 40.0 },
     ];
 
@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     sampleData.forEach(data => {
         const dataSection = document.createElement('div');
         dataSection.className = 'card';
+
+        // Apply dark orange background if ADX is less than 25
+        if (data.adx < 25) {
+            dataSection.classList.add('low-adx');
+        }
+
         dataSection.innerHTML = `
             <h3>${data.name}</h3>
             <p><strong>50-Day MA:</strong> ${data.fiftyDayMA}</p>
