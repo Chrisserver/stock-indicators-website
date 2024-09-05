@@ -31,6 +31,21 @@ h1 {
     text-align: center;
 }
 
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: #4a90e2;
+    margin: 0 0 10px;
+    font-size: 1.8em;
+}
+
+.card p {
+    color: #555;
+    line-height: 1.6;
+}
+
 h3 {
     color: #333;
     font-size: 1.5em;
@@ -69,21 +84,12 @@ p {
     opacity: 0.9;
 }
 
-
-.card:hover {
-    transform: translateY(-5px);
+.low-adx {
+    background-color: #ff8c00; /* Dark Orange */
 }
 
-.card h3 {
-    color: #4a90e2;
-    margin: 0 0 10px;
-    font-size: 1.8em;
-}
 
-.card p {
-    color: #555;
-    line-height: 1.6;
-}
+
 
 /* Table Styles */
 table {
