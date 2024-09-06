@@ -68,6 +68,12 @@ async function loadMovingAverages() {
         // Create a section to display the data
         const dataSection = document.createElement('div');
         dataSection.className = 'card';
+
+        // Apply dark red background if ADX is less than 25
+        if (data.adx < 25) {
+            dataSection.classList.add('low-adx');
+        }
+        
         dataSection.innerHTML = `
             <h3>${data.name}</h3>
             <p><strong>50-Day MA:</strong> ${data.fiftyDayMA || 'N/A'}</p>
